@@ -27,4 +27,6 @@ public interface BillDetailMapper {
     int updateByPrimaryKeySelective(BillDetail record);
 
     int updateByPrimaryKey(BillDetail record);
+    
+    int deleteByBillId(Long billId);
 }

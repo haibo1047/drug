@@ -48,6 +48,10 @@ public class BillDetailService implements CommonService<BillDetail> {
 	public int deleteModel(Long id) {
 		return billDetailMapper.deleteByPrimaryKey(id);
 	}
+	
+	public int deleteByBillId(Long billId){
+		return billDetailMapper.deleteByBillId(billId);
+	}
 
 	public List<BillDetail> findListByBillId(Long billId){
 		BillDetailExample example = new BillDetailExample();

@@ -23,7 +23,7 @@
   </head>
 <script type="text/javascript">
 function gotoback() {
-	location = '<spring:url value="storage.do"/>';
+	location = '<spring:url value="list.do"/>';
 }
 
 function regist(){
@@ -79,7 +79,7 @@ function datepick(){
 	}
 </script>
 	<body>
-  	<form:form action="save.do" modelAttribute="bill" name="f1" method="post">
+  	<form:form action="saveDetails.do" modelAttribute="bill" name="f1" method="post">
   		单据:<c:out value="${bill.billNo}"></c:out>
   		<div class="clum_title"></div>
   		<form:hidden path="id"/>
@@ -118,22 +118,22 @@ function datepick(){
 						<a href="#" onclick="deleteRow(this)"></a>
 					</td>
 				</tr>
-				<c:forEach items="${bill.billDetailSet}" var="billDetail">
+				<c:forEach items="${details}" var="billDetail">
 					<input type="hidden" name="detailId" value="${billDetail.id}"/>
 					<tr>
 						<td>
-							<input type="text" class="drugName" value="${billDetail.drug.drugName}">
-							<input type="hidden" name="drugId" class="drugId" value="${billDetail.drug.id}"/>
+							<input type="text" class="drugName" value="${billDetail.extraInfo.drugName}">
+							<input type="hidden" name="drugId" class="drugId" value="${billDetail.drugId}"/>
 						</td>
 						<td>
 							<select name="createUser">
 								<c:forEach items="${providerList}" var="p">
-									<option value="${p.id}" <c:if test="${p.id==billDetail.provider.id}">selected</c:if>><c:out value="${p.providerName}"/></option>
+									<option value="${p.id}" <c:if test="${p.id==billDetail.providerId}">selected</c:if>><c:out value="${p.providerName}"/></option>
 								</c:forEach>
 							</select>
 						</td>
 						<td>
-							<input type="text" readonly="readonly" class="datepicker" name="productDate" value="${billDetail.productDateString}">
+							<input type="text" readonly="readonly" class="datepicker" name="productDate" value="${billDetail.extraInfo.productDate}">
 						</td>
 						<td>
 							<input type="text" name="drugCount" value="${billDetail.drugCount}">

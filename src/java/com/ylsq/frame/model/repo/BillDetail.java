@@ -1,6 +1,7 @@
 package com.ylsq.frame.model.repo;
 
 import java.util.Date;
+import java.util.Map;
 
 import com.ylsq.frame.model.common.PK;
 
@@ -16,8 +17,18 @@ public class BillDetail implements PK{
     private Long drugId;
 
     private Long providerId;
+    
+    private Map<String,String> extraInfo;
 
-    public Long getId() {
+    public Map<String, String> getExtraInfo() {
+		return extraInfo;
+	}
+
+	public void setExtraInfo(Map<String, String> extraInfo) {
+		this.extraInfo = extraInfo;
+	}
+
+	public Long getId() {
         return id;
     }
 

@@ -15,13 +15,13 @@
   </head>
 <script type="text/javascript">
 function gotoback() {
-	location = '<spring:url value="storage.do"/>';
+	location = '<spring:url value="list.do"/>';
 }
 </script>
 	<body>
-  	<form:form action="save.do" method="post" modelAttribute="bill" name="f1"><%--
-  		增加${bill.billType.label}
-  		--%><div class="clum_title"></div>
+  	<form:form action="save.do" method="post" modelAttribute="bill" name="f1">
+  		编辑
+  		<div class="clum_title"></div>
   		<form:hidden path="id"/>
   		<form:hidden path="billType"/>
 		<table class="mainTable">
@@ -45,7 +45,7 @@ function gotoback() {
 						<input type="button" value="确认" onclick="f1.submit()" class="r_btn"/>
 					</span>
 					<span class="f_btn">
-						<input type="button" value="返回" onclick="goback()" class="r_btn"/>
+						<input type="button" value="返回" onclick="gotoback()" class="r_btn"/>
 					</span>
 				</td>
 			</tr>

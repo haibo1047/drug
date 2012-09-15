@@ -225,4 +225,9 @@
       PROVIDER_ID = #{providerId,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  
+  <delete id="deleteByBillId" parameterType="java.lang.Long" >
+    delete from bill_detail
+    where BILL_ID = #{billId,jdbcType=BIGINT}
+  </delete>
 </mapper>

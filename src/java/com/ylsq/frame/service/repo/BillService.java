@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ylsq.frame.dao.repo.BillDetailMapper;
 import com.ylsq.frame.dao.repo.BillMapper;
 import com.ylsq.frame.dict.common.BillType;
 import com.ylsq.frame.model.repo.Bill;
@@ -24,6 +25,8 @@ import com.ylsq.frame.utils.DateHelper;
 public class BillService implements CommonService<Bill> {
 	@Autowired
 	private BillMapper billMapper;
+	@Autowired
+	private BillDetailMapper billDetailMapper;
 
 	@Override
 	public List<Bill> findAll() {
@@ -52,6 +55,10 @@ public class BillService implements CommonService<Bill> {
 		return billMapper.deleteByPrimaryKey(id);
 	}
 
+	public int deleteBillCascade(Long billId){
+		billDetailMapper.deleteByBillId(billId);
+		return billMapper.deleteByPrimaryKey(billId);
+	}
 	public List<Bill> findListByType(BillType billType){
 		BillExample example = new BillExample();
 		example.createCriteria().andBillTypeEqualTo(billType.getValue());

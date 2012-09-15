@@ -11,7 +11,7 @@
 <link type="text/css" href="<c:url value="/css/common.css"/>" rel="stylesheet" />
 
 <script type="text/javascript">
-  	function goback(){
+  	function objectgoback(){
   		location = "${ctx}/${objectDir}/list.do";
   	}
 </script>

@@ -65,7 +65,7 @@
 						<input type="button" value="确认" onclick="saveConfigMenu()" class="r_btn"/>
 					</span>
 					<span class="f_btn">
-						<input type="button" value="返回" onclick="goback()" class="r_btn"/>
+						<input type="button" value="返回" onclick="objectgoback()" class="r_btn"/>
 					</span>
 				</td>
 			</tr>
