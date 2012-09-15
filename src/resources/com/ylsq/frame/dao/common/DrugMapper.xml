@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylsq.frame.dao.common.DrugMapper" >
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.model.common.Drug" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="APPROVAL_NUMBER" property="approvalNumber" jdbcType="VARCHAR" />
+    <result column="DRUG_FORM" property="drugForm" jdbcType="VARCHAR" />
+    <result column="DRUG_NAME" property="drugName" jdbcType="VARCHAR" />
+    <result column="DRUG_TYPE" property="drugType" jdbcType="INTEGER" />
+    <result column="DRUG_UNIT" property="drugUnit" jdbcType="VARCHAR" />
+    <result column="GUARANTEE_MONTH" property="guaranteeMonth" jdbcType="INTEGER" />
+    <result column="MANUFACTURER" property="manufacturer" jdbcType="VARCHAR" />
+    <result column="PRODUCT_MODEL" property="productModel" jdbcType="VARCHAR" />
+    <result column="SIMPLE_SPELL" property="simpleSpell" jdbcType="VARCHAR" />
+    <result column="PROVIDER_ID" property="providerId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, APPROVAL_NUMBER, DRUG_FORM, DRUG_NAME, DRUG_TYPE, DRUG_UNIT, GUARANTEE_MONTH, 
+    MANUFACTURER, PRODUCT_MODEL, SIMPLE_SPELL, PROVIDER_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.common.DrugExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from drug
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from drug
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from drug
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.model.common.DrugExample" >
+    delete from drug
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ylsq.frame.model.common.Drug" >
+    insert into drug (ID, APPROVAL_NUMBER, DRUG_FORM, 
+      DRUG_NAME, DRUG_TYPE, DRUG_UNIT, 
+      GUARANTEE_MONTH, MANUFACTURER, PRODUCT_MODEL, 
+      SIMPLE_SPELL, PROVIDER_ID)
+    values (#{id,jdbcType=BIGINT}, #{approvalNumber,jdbcType=VARCHAR}, #{drugForm,jdbcType=VARCHAR}, 
+      #{drugName,jdbcType=VARCHAR}, #{drugType,jdbcType=INTEGER}, #{drugUnit,jdbcType=VARCHAR}, 
+      #{guaranteeMonth,jdbcType=INTEGER}, #{manufacturer,jdbcType=VARCHAR}, #{productModel,jdbcType=VARCHAR}, 
+      #{simpleSpell,jdbcType=VARCHAR}, #{providerId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylsq.frame.model.common.Drug" >
+    insert into drug
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="approvalNumber != null" >
+        APPROVAL_NUMBER,
+      </if>
+      <if test="drugForm != null" >
+        DRUG_FORM,
+      </if>
+      <if test="drugName != null" >
+        DRUG_NAME,
+      </if>
+      <if test="drugType != null" >
+        DRUG_TYPE,
+      </if>
+      <if test="drugUnit != null" >
+        DRUG_UNIT,
+      </if>
+      <if test="guaranteeMonth != null" >
+        GUARANTEE_MONTH,
+      </if>
+      <if test="manufacturer != null" >
+        MANUFACTURER,
+      </if>
+      <if test="productModel != null" >
+        PRODUCT_MODEL,
+      </if>
+      <if test="simpleSpell != null" >
+        SIMPLE_SPELL,
+      </if>
+      <if test="providerId != null" >
+        PROVIDER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="approvalNumber != null" >
+        #{approvalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="drugForm != null" >
+        #{drugForm,jdbcType=VARCHAR},
+      </if>
+      <if test="drugName != null" >
+        #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugType != null" >
+        #{drugType,jdbcType=INTEGER},
+      </if>
+      <if test="drugUnit != null" >
+        #{drugUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="guaranteeMonth != null" >
+        #{guaranteeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="manufacturer != null" >
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="productModel != null" >
+        #{productModel,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleSpell != null" >
+        #{simpleSpell,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null" >
+        #{providerId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ylsq.frame.model.common.DrugExample" resultType="java.lang.Integer" >
+    select count(*) from drug
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update drug
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.approvalNumber != null" >
+        APPROVAL_NUMBER = #{record.approvalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugForm != null" >
+        DRUG_FORM = #{record.drugForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugName != null" >
+        DRUG_NAME = #{record.drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugType != null" >
+        DRUG_TYPE = #{record.drugType,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugUnit != null" >
+        DRUG_UNIT = #{record.drugUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guaranteeMonth != null" >
+        GUARANTEE_MONTH = #{record.guaranteeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.manufacturer != null" >
+        MANUFACTURER = #{record.manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productModel != null" >
+        PRODUCT_MODEL = #{record.productModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simpleSpell != null" >
+        SIMPLE_SPELL = #{record.simpleSpell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerId != null" >
+        PROVIDER_ID = #{record.providerId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update drug
+    set ID = #{record.id,jdbcType=BIGINT},
+      APPROVAL_NUMBER = #{record.approvalNumber,jdbcType=VARCHAR},
+      DRUG_FORM = #{record.drugForm,jdbcType=VARCHAR},
+      DRUG_NAME = #{record.drugName,jdbcType=VARCHAR},
+      DRUG_TYPE = #{record.drugType,jdbcType=INTEGER},
+      DRUG_UNIT = #{record.drugUnit,jdbcType=VARCHAR},
+      GUARANTEE_MONTH = #{record.guaranteeMonth,jdbcType=INTEGER},
+      MANUFACTURER = #{record.manufacturer,jdbcType=VARCHAR},
+      PRODUCT_MODEL = #{record.productModel,jdbcType=VARCHAR},
+      SIMPLE_SPELL = #{record.simpleSpell,jdbcType=VARCHAR},
+      PROVIDER_ID = #{record.providerId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.model.common.Drug" >
+    update drug
+    <set >
+      <if test="approvalNumber != null" >
+        APPROVAL_NUMBER = #{approvalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="drugForm != null" >
+        DRUG_FORM = #{drugForm,jdbcType=VARCHAR},
+      </if>
+      <if test="drugName != null" >
+        DRUG_NAME = #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugType != null" >
+        DRUG_TYPE = #{drugType,jdbcType=INTEGER},
+      </if>
+      <if test="drugUnit != null" >
+        DRUG_UNIT = #{drugUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="guaranteeMonth != null" >
+        GUARANTEE_MONTH = #{guaranteeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="manufacturer != null" >
+        MANUFACTURER = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="productModel != null" >
+        PRODUCT_MODEL = #{productModel,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleSpell != null" >
+        SIMPLE_SPELL = #{simpleSpell,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null" >
+        PROVIDER_ID = #{providerId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.model.common.Drug" >
+    update drug
+    set APPROVAL_NUMBER = #{approvalNumber,jdbcType=VARCHAR},
+      DRUG_FORM = #{drugForm,jdbcType=VARCHAR},
+      DRUG_NAME = #{drugName,jdbcType=VARCHAR},
+      DRUG_TYPE = #{drugType,jdbcType=INTEGER},
+      DRUG_UNIT = #{drugUnit,jdbcType=VARCHAR},
+      GUARANTEE_MONTH = #{guaranteeMonth,jdbcType=INTEGER},
+      MANUFACTURER = #{manufacturer,jdbcType=VARCHAR},
+      PRODUCT_MODEL = #{productModel,jdbcType=VARCHAR},
+      SIMPLE_SPELL = #{simpleSpell,jdbcType=VARCHAR},
+      PROVIDER_ID = #{providerId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

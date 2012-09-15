@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylsq.frame.dao.repo.BillMapper" >
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.model.repo.Bill" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="AVAILABLE" property="available" jdbcType="INTEGER" />
+    <result column="BILL_NO" property="billNo" jdbcType="VARCHAR" />
+    <result column="BILL_TYPE" property="billType" jdbcType="INTEGER" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="REPOSITORY_ID" property="repositoryId" jdbcType="BIGINT" />
+    <result column="PROVIDER_ID" property="providerId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, AVAILABLE, BILL_NO, BILL_TYPE, CREATE_DATE, CREATE_USER, REPOSITORY_ID, PROVIDER_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.repo.BillExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bill
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bill
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.model.repo.BillExample" >
+    delete from bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ylsq.frame.model.repo.Bill" >
+    insert into bill (ID, AVAILABLE, BILL_NO, 
+      BILL_TYPE, CREATE_DATE, CREATE_USER, 
+      REPOSITORY_ID, PROVIDER_ID)
+    values (#{id,jdbcType=BIGINT}, #{available,jdbcType=INTEGER}, #{billNo,jdbcType=VARCHAR}, 
+      #{billType,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{repositoryId,jdbcType=BIGINT}, #{providerId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylsq.frame.model.repo.Bill" >
+    insert into bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="available != null" >
+        AVAILABLE,
+      </if>
+      <if test="billNo != null" >
+        BILL_NO,
+      </if>
+      <if test="billType != null" >
+        BILL_TYPE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="repositoryId != null" >
+        REPOSITORY_ID,
+      </if>
+      <if test="providerId != null" >
+        PROVIDER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=INTEGER},
+      </if>
+      <if test="billNo != null" >
+        #{billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="repositoryId != null" >
+        #{repositoryId,jdbcType=BIGINT},
+      </if>
+      <if test="providerId != null" >
+        #{providerId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ylsq.frame.model.repo.BillExample" resultType="java.lang.Integer" >
+    select count(*) from bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bill
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.available != null" >
+        AVAILABLE = #{record.available,jdbcType=INTEGER},
+      </if>
+      <if test="record.billNo != null" >
+        BILL_NO = #{record.billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billType != null" >
+        BILL_TYPE = #{record.billType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repositoryId != null" >
+        REPOSITORY_ID = #{record.repositoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.providerId != null" >
+        PROVIDER_ID = #{record.providerId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bill
+    set ID = #{record.id,jdbcType=BIGINT},
+      AVAILABLE = #{record.available,jdbcType=INTEGER},
+      BILL_NO = #{record.billNo,jdbcType=VARCHAR},
+      BILL_TYPE = #{record.billType,jdbcType=INTEGER},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      REPOSITORY_ID = #{record.repositoryId,jdbcType=BIGINT},
+      PROVIDER_ID = #{record.providerId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.model.repo.Bill" >
+    update bill
+    <set >
+      <if test="available != null" >
+        AVAILABLE = #{available,jdbcType=INTEGER},
+      </if>
+      <if test="billNo != null" >
+        BILL_NO = #{billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        BILL_TYPE = #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="repositoryId != null" >
+        REPOSITORY_ID = #{repositoryId,jdbcType=BIGINT},
+      </if>
+      <if test="providerId != null" >
+        PROVIDER_ID = #{providerId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.model.repo.Bill" >
+    update bill
+    set AVAILABLE = #{available,jdbcType=INTEGER},
+      BILL_NO = #{billNo,jdbcType=VARCHAR},
+      BILL_TYPE = #{billType,jdbcType=INTEGER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      REPOSITORY_ID = #{repositoryId,jdbcType=BIGINT},
+      PROVIDER_ID = #{providerId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="nextOneBillNo" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select case when nid is null then 1 else nid end from 
+  		(select (max(substr(bill_no,length(bill_no)-4))+1)%1000 nid FROM BILL where bill_type=#{billType})t
+  </select>
+</mapper>

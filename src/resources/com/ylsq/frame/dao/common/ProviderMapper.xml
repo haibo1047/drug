@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylsq.frame.dao.common.ProviderMapper" >
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.model.common.Provider" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="COMMON_CONTACT" property="commonContact" jdbcType="VARCHAR" />
+    <result column="PROVIDER_NAME" property="providerName" jdbcType="VARCHAR" />
+    <result column="PROVIDER_TEL" property="providerTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, COMMON_CONTACT, PROVIDER_NAME, PROVIDER_TEL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.common.ProviderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from provider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from provider
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from provider
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.model.common.ProviderExample" >
+    delete from provider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ylsq.frame.model.common.Provider" >
+    insert into provider (ID, COMMON_CONTACT, PROVIDER_NAME, 
+      PROVIDER_TEL)
+    values (#{id,jdbcType=BIGINT}, #{commonContact,jdbcType=VARCHAR}, #{providerName,jdbcType=VARCHAR}, 
+      #{providerTel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylsq.frame.model.common.Provider" >
+    insert into provider
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="commonContact != null" >
+        COMMON_CONTACT,
+      </if>
+      <if test="providerName != null" >
+        PROVIDER_NAME,
+      </if>
+      <if test="providerTel != null" >
+        PROVIDER_TEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="commonContact != null" >
+        #{commonContact,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null" >
+        #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="providerTel != null" >
+        #{providerTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ylsq.frame.model.common.ProviderExample" resultType="java.lang.Integer" >
+    select count(*) from provider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update provider
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.commonContact != null" >
+        COMMON_CONTACT = #{record.commonContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerName != null" >
+        PROVIDER_NAME = #{record.providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerTel != null" >
+        PROVIDER_TEL = #{record.providerTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update provider
+    set ID = #{record.id,jdbcType=BIGINT},
+      COMMON_CONTACT = #{record.commonContact,jdbcType=VARCHAR},
+      PROVIDER_NAME = #{record.providerName,jdbcType=VARCHAR},
+      PROVIDER_TEL = #{record.providerTel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.model.common.Provider" >
+    update provider
+    <set >
+      <if test="commonContact != null" >
+        COMMON_CONTACT = #{commonContact,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null" >
+        PROVIDER_NAME = #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="providerTel != null" >
+        PROVIDER_TEL = #{providerTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.model.common.Provider" >
+    update provider
+    set COMMON_CONTACT = #{commonContact,jdbcType=VARCHAR},
+      PROVIDER_NAME = #{providerName,jdbcType=VARCHAR},
+      PROVIDER_TEL = #{providerTel,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

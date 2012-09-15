@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylsq.frame.dao.common.DrugRepositoryMapper" >
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.model.common.DrugRepository" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="BATCH_NUM" property="batchNum" jdbcType="VARCHAR" />
+    <result column="DRUG_NUMBER" property="drugNumber" jdbcType="INTEGER" />
+    <result column="DRUG_PRICE" property="drugPrice" jdbcType="DOUBLE" />
+    <result column="PRODUCE_DATE" property="produceDate" jdbcType="TIMESTAMP" />
+    <result column="DRUG_ID" property="drugId" jdbcType="BIGINT" />
+    <result column="REPOSITORY_ID" property="repositoryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, BATCH_NUM, DRUG_NUMBER, DRUG_PRICE, PRODUCE_DATE, DRUG_ID, REPOSITORY_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.common.DrugRepositoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from drug_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from drug_repository
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from drug_repository
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.model.common.DrugRepositoryExample" >
+    delete from drug_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+    insert into drug_repository (ID, BATCH_NUM, DRUG_NUMBER, 
+      DRUG_PRICE, PRODUCE_DATE, DRUG_ID, 
+      REPOSITORY_ID)
+    values (#{id,jdbcType=BIGINT}, #{batchNum,jdbcType=VARCHAR}, #{drugNumber,jdbcType=INTEGER}, 
+      #{drugPrice,jdbcType=DOUBLE}, #{produceDate,jdbcType=TIMESTAMP}, #{drugId,jdbcType=BIGINT}, 
+      #{repositoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+    insert into drug_repository
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="batchNum != null" >
+        BATCH_NUM,
+      </if>
+      <if test="drugNumber != null" >
+        DRUG_NUMBER,
+      </if>
+      <if test="drugPrice != null" >
+        DRUG_PRICE,
+      </if>
+      <if test="produceDate != null" >
+        PRODUCE_DATE,
+      </if>
+      <if test="drugId != null" >
+        DRUG_ID,
+      </if>
+      <if test="repositoryId != null" >
+        REPOSITORY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchNum != null" >
+        #{batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="drugNumber != null" >
+        #{drugNumber,jdbcType=INTEGER},
+      </if>
+      <if test="drugPrice != null" >
+        #{drugPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="produceDate != null" >
+        #{produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugId != null" >
+        #{drugId,jdbcType=BIGINT},
+      </if>
+      <if test="repositoryId != null" >
+        #{repositoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ylsq.frame.model.common.DrugRepositoryExample" resultType="java.lang.Integer" >
+    select count(*) from drug_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update drug_repository
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchNum != null" >
+        BATCH_NUM = #{record.batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugNumber != null" >
+        DRUG_NUMBER = #{record.drugNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugPrice != null" >
+        DRUG_PRICE = #{record.drugPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.produceDate != null" >
+        PRODUCE_DATE = #{record.produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.drugId != null" >
+        DRUG_ID = #{record.drugId,jdbcType=BIGINT},
+      </if>
+      <if test="record.repositoryId != null" >
+        REPOSITORY_ID = #{record.repositoryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update drug_repository
+    set ID = #{record.id,jdbcType=BIGINT},
+      BATCH_NUM = #{record.batchNum,jdbcType=VARCHAR},
+      DRUG_NUMBER = #{record.drugNumber,jdbcType=INTEGER},
+      DRUG_PRICE = #{record.drugPrice,jdbcType=DOUBLE},
+      PRODUCE_DATE = #{record.produceDate,jdbcType=TIMESTAMP},
+      DRUG_ID = #{record.drugId,jdbcType=BIGINT},
+      REPOSITORY_ID = #{record.repositoryId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+    update drug_repository
+    <set >
+      <if test="batchNum != null" >
+        BATCH_NUM = #{batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="drugNumber != null" >
+        DRUG_NUMBER = #{drugNumber,jdbcType=INTEGER},
+      </if>
+      <if test="drugPrice != null" >
+        DRUG_PRICE = #{drugPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="produceDate != null" >
+        PRODUCE_DATE = #{produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugId != null" >
+        DRUG_ID = #{drugId,jdbcType=BIGINT},
+      </if>
+      <if test="repositoryId != null" >
+        REPOSITORY_ID = #{repositoryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+    update drug_repository
+    set BATCH_NUM = #{batchNum,jdbcType=VARCHAR},
+      DRUG_NUMBER = #{drugNumber,jdbcType=INTEGER},
+      DRUG_PRICE = #{drugPrice,jdbcType=DOUBLE},
+      PRODUCE_DATE = #{produceDate,jdbcType=TIMESTAMP},
+      DRUG_ID = #{drugId,jdbcType=BIGINT},
+      REPOSITORY_ID = #{repositoryId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
