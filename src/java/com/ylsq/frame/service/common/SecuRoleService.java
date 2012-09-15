@@ -5,7 +5,8 @@ package com.ylsq.frame.service.common;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.ylsq.frame.dao.common.SecuRoleMapper;
@@ -17,7 +18,7 @@ import com.ylsq.frame.model.common.SecuRole;
  */
 @Service
 public class SecuRoleService implements CommonService<SecuRole> {
-	@Autowired
+	@Resource
 	private SecuRoleMapper secuRoleMapper;
 
 	@Override

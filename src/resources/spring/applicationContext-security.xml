@@ -18,11 +18,10 @@
 		<remember-me />
 		<anonymous enabled="false"/>
 		<custom-filter ref="resourceSecurityInterceptor" after="LAST"/>
-		<session-management invalid-session-url="/timeout.do">
-			<!--<concurrency-control max-sessions="1"
-				error-if-maximum-exceeded="false" />-->
+		<!--<session-management invalid-session-url="/timeout.do">
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		</session-management>
-	</http>
+	--></http>
 	
 	<beans:bean id="resourceSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">    
        <beans:property name="authenticationManager" ref="authenticationManager"/>    

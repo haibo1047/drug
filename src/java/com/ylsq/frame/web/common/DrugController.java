@@ -38,6 +38,7 @@ public class DrugController extends CommonController<Drug>{
 	private DrugService drugService;
 	@Autowired
 	private ProviderService providerService;
+	
 	@Override
 	protected String dir() {
 		return "drug";

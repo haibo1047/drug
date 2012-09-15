@@ -28,6 +28,7 @@ public class SecuMenuController extends CommonController<SecuMenu>{
 	private static Logger logger = LoggerFactory.getLogger(SecuMenuController.class);
 	@Autowired
 	private SecuMenuService secuMenuService;
+	
 	@Override
 	protected String dir() {
 		return "menu";

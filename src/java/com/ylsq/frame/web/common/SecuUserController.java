@@ -25,6 +25,7 @@ public class SecuUserController extends CommonController<SecuUser>{
 	private SecuUserService secuUserService;
 	@Autowired
 	private SpringProperties springProperties;
+	
 	@Override
 	protected String dir() {
 		return "user";

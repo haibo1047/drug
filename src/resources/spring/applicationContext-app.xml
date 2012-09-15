@@ -54,7 +54,7 @@
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.ylsq.frame.dao" />
-	</bean><!--
+	</bean>
 
 	<tx:advice id="advice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -73,11 +73,11 @@
 		<aop:advisor pointcut-ref="allmethod" advice-ref="advice" />
 	</aop:config>
 
-	--><!-- 开启AOP监听 只对当前配置文件有效 -->
-	<!--<aop:aspectj-autoproxy expose-proxy="true" />
+	<aop:config proxy-target-class="true"/>
+	<!--开启AOP监听 只对当前配置文件有效-->
+	<aop:aspectj-autoproxy expose-proxy="true" />
 
-	--><context:component-scan base-package="com.ylsq.frame">
+	<context:component-scan base-package="com.ylsq.frame">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <!--<context:exclude-filter type="annotation" expression="com.ylsq.frame.sh.NotSpringComponent"/>-->
     </context:component-scan>
 </beans>

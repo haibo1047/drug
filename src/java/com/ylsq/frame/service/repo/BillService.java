@@ -5,8 +5,9 @@ package com.ylsq.frame.service.repo;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ylsq.frame.dao.repo.BillDetailMapper;
@@ -23,9 +24,9 @@ import com.ylsq.frame.utils.DateHelper;
  */
 @Service
 public class BillService implements CommonService<Bill> {
-	@Autowired
+	@Resource
 	private BillMapper billMapper;
-	@Autowired
+	@Resource
 	private BillDetailMapper billDetailMapper;
 
 	@Override

@@ -8,12 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ylsq.frame.dao.common.DrugMapper;
@@ -29,9 +30,9 @@ import com.ylsq.frame.utils.StringHelper;
  */
 @Service
 public class DrugService implements CommonService<Drug>{
-	@Autowired
+	@Resource
 	private DrugMapper drugMapper;
-	@Autowired
+	@Resource(name="providerService")
 	private ProviderService providerService;
 
 	@Override

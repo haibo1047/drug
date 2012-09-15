@@ -5,7 +5,8 @@ package com.ylsq.frame.service.common;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.ylsq.frame.dao.common.SecuMenuMapper;
@@ -18,7 +19,7 @@ import com.ylsq.frame.model.common.SecuMenuExample;
  */
 @Service
 public class SecuMenuService implements CommonService<SecuMenu>{
-	@Autowired
+	@Resource
 	private SecuMenuMapper secuMenuMapper;
 	
 	@Override

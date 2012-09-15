@@ -5,7 +5,8 @@ package com.ylsq.frame.service.repo;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.ylsq.frame.dao.repo.BillDetailMapper;
@@ -19,7 +20,7 @@ import com.ylsq.frame.service.common.CommonService;
  */
 @Service
 public class BillDetailService implements CommonService<BillDetail> {
-	@Autowired
+	@Resource
 	private BillDetailMapper billDetailMapper;
 	
 	@Override
@@ -56,6 +57,7 @@ public class BillDetailService implements CommonService<BillDetail> {
 	public List<BillDetail> findListByBillId(Long billId){
 		BillDetailExample example = new BillDetailExample();
 		example.createCriteria().andBillIdEqualTo(billId);
+		example.setOrderByClause("drug_id");
 		return billDetailMapper.selectByExample(example);
 	}
 	

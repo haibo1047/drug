@@ -20,6 +20,7 @@ import com.ylsq.frame.service.common.RepositoryService;
 public class RepositoryController extends CommonController<Repository>{
 	@Autowired
 	private RepositoryService repositoryService;
+	
 	@Override
 	protected CommonService<Repository> getModelService() {
 		return repositoryService;
