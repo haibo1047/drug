@@ -81,4 +81,9 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/applicationContext.xml</param-value>
 	</context-param>
+	
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/pages/exception.jsp</location>
+	</error-page>
 </web-app>

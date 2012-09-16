@@ -27,12 +27,4 @@
 		<!--one of the properties available;the maximum file size in bytes -->
 		<property name="maxUploadSize" value="100000000" />
 	</bean>
-
-	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="java.lang.Exception">exception</prop>
-			</props>
-		</property>
-	</bean>
 </beans>
