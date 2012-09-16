@@ -34,12 +34,6 @@ public class IndexController {
 		model.addAttribute("systemName", springProperties.getSystemName());
 	}
 	
-	
-	@RequestMapping("/expose/exception")
-	public String exception() throws Exception{
-		return "exception";
-	}
-	
 	@RequestMapping("/expose/login")
 	public String login() throws Exception{
 		return "login";

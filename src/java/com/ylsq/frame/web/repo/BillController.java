@@ -59,6 +59,7 @@ public abstract class BillController {
 		List<Bill> billList = customList();
 		model.addAttribute("billList", billList);
 		logger.debug(billList.size()+"");
+		logger.debug(billService.nextOneBillNo(getBillType()));
 		return prefix+getBillType().getBillPrefix()+"/list";
 	}
 	

@@ -3,7 +3,9 @@
  */
 package com.ylsq.frame.service.repo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -71,8 +73,12 @@ public class BillService implements CommonService<Bill> {
 	}
 	
 	public String nextOneBillNo(BillType billType){
-		int no = billMapper.nextOneBillNo(billType.getValue());
-		return billType.getPrefix()+DateHelper.formatNow(null)+StringUtils.leftPad(no+"",4,"0");
+		String prefix = billType.getPrefix()+DateHelper.formatNow(null);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("billType", billType.getValue());
+		map.put("prefix", prefix+"%");
+		int no = billMapper.nextOneBillNo(map);
+		return prefix+StringUtils.leftPad(no+"",4,"0");
 	}
 	
 	public int avaliableBill(Long billId){

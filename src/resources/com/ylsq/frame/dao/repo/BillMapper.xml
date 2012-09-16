@@ -256,8 +256,8 @@
     where ID = #{id,jdbcType=BIGINT}
   </update>
   
-  <select id="nextOneBillNo" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  <select id="nextOneBillNo" parameterType="java.util.HashMap" resultType="java.lang.Integer">
   	select case when nid is null then 1 else nid end from 
-  		(select (max(substr(bill_no,length(bill_no)-4))+1)%1000 nid FROM BILL where bill_type=#{billType})t
+  		(select (max(substr(bill_no,length(bill_no)-4))+1)%1000 nid FROM BILL where bill_type=#{billType} and bill_no like #{prefix})t
   </select>
 </mapper>

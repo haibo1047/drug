@@ -3,6 +3,8 @@ package com.ylsq.frame.dao.repo;
 import com.ylsq.frame.model.repo.Bill;
 import com.ylsq.frame.model.repo.BillExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface BillMapper {
@@ -28,5 +30,5 @@ public interface BillMapper {
 
     int updateByPrimaryKey(Bill record);
     
-    int nextOneBillNo(int billType);
+    int nextOneBillNo(Map<String,Object> map);
 }
