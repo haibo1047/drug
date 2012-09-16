@@ -25,7 +25,7 @@ public class Drug implements PK{
     
 
     public String getDrugDescript() {
-		return getDrugName()+"-"+getDrugForm()+getProductModel();
+		return getDrugName()+"-"+getDrugForm()+"-"+getProductModel();
 	}
 
 
