@@ -34,7 +34,7 @@ public class QueryStockController{
 	private RepositoryService repositoryService;
 	
 	@RequestMapping("stock")
-	public String queryStock(Model model){
+	public String queryStock(Model model) throws Exception{
 		List<Drug> drugList = drugService.findAll();
 		List<Repository> repoList = repositoryService.findAll();
 		Map<Long,String> drugMap = new HashMap<Long,String>();

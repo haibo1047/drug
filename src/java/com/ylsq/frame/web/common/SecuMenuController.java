@@ -51,7 +51,7 @@ public class SecuMenuController extends CommonController<SecuMenu>{
 	}
 	
 	@RequestMapping("ssave")
-	public String ssave(@Valid SecuMenu menu,BindingResult result,Model model){
+	public String ssave(@Valid SecuMenu menu,BindingResult result,Model model) throws Exception{
 		return save(menu, model);
 	}
 }

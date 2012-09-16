@@ -35,18 +35,23 @@ public class IndexController {
 	}
 	
 	
+	@RequestMapping("/expose/exception")
+	public String exception() throws Exception{
+		return "exception";
+	}
+	
 	@RequestMapping("/expose/login")
-	public String login(){
+	public String login() throws Exception{
 		return "login";
 	}
 	
 	@RequestMapping("/top")
-	public void top(Model model){
+	public void top(Model model) throws Exception{
 		logger.debug(springProperties.getSystemName());
 	}
 	
 	@RequestMapping("/leftMenu")
-	public void leftMenu(Model model){
+	public void leftMenu(Model model) throws Exception{
 		String username = SecurityUtils.fetchUsername();
 		if(StringUtils.isNotBlank(username)){
 			List<SecuMenu> menuList = secuMenuService.findListByUsername(username);

@@ -40,14 +40,14 @@ public abstract class CommonController<T extends PK> {
 	}
 	
 	@RequestMapping("/list")
-	public String list(Model model){
+	public String list(Model model) throws Exception{
 		customList();
 		model.addAttribute("objectList", objectList);
 		return getListPath();
 	}
 	
 	@RequestMapping("/add")
-	public String add(Model model){
+	public String add(Model model) throws Exception{
 		object = BeanUtils.instantiate(getObjectClass());
 		beforeEdit(model);
 		model.addAttribute("object", object);
@@ -56,7 +56,7 @@ public abstract class CommonController<T extends PK> {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(Long id,Model model){
+	public String edit(Long id,Model model) throws Exception{
 		object = getModelService().findById(id);
 		beforeEdit(model);
 		model.addAttribute("object", object);
@@ -65,7 +65,7 @@ public abstract class CommonController<T extends PK> {
 	}
 	
 	@RequestMapping("/save")
-	public String save(@ModelAttribute T obj,Model model){
+	public String save(@ModelAttribute T obj,Model model) throws Exception{
 		object = obj;
 		beforeSave();
 		getModelService().saveOrUpdateModel(object);
@@ -73,7 +73,7 @@ public abstract class CommonController<T extends PK> {
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Long id,Model model){
+	public String delete(Long id,Model model) throws Exception{
 		beforeDelete(model);
 		getModelService().deleteModel(id);
 		return list(model);
@@ -103,7 +103,7 @@ public abstract class CommonController<T extends PK> {
 	
 	protected void beforeDelete(Model model){}
 	
-	public void exportFile(HttpServletResponse response,HSSFWorkbook book){
+	public void exportFile(HttpServletResponse response,HSSFWorkbook book) throws Exception{
 		OutputStream os;
 		try {
 			response.setHeader("Content-Disposition", "attachment; filename=temp.xls");

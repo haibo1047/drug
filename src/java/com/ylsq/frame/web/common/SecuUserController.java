@@ -49,7 +49,7 @@ public class SecuUserController extends CommonController<SecuUser>{
 	}
 
 	@RequestMapping("resetPassword")
-	public String resetPassword(Long id,Model model){
+	public String resetPassword(Long id,Model model) throws Exception{
 		SecuUser user = new SecuUser();
 		user.setId(id);
 		model.addAttribute("user", user);
@@ -57,7 +57,7 @@ public class SecuUserController extends CommonController<SecuUser>{
 	}
 
 	@RequestMapping("savePassword")
-	public String savePassword(HttpServletRequest request){
+	public String savePassword(HttpServletRequest request) throws Exception{
 		logger.debug(request.getParameter("id"));
 		logger.debug(request.getParameter("pwd"));
 		return "0";

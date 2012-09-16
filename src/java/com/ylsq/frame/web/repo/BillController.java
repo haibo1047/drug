@@ -55,14 +55,15 @@ public abstract class BillController {
 	}
 	
 	@RequestMapping("list")
-	public String list(Model model){
+	public String list(Model model) throws Exception{
 		List<Bill> billList = customList();
 		model.addAttribute("billList", billList);
+		logger.debug(billList.size()+"");
 		return prefix+getBillType().getBillPrefix()+"/list";
 	}
 	
 	@RequestMapping("add")
-	public String add(Model model){
+	public String add(Model model) throws Exception{
 		bill = new Bill();
 		bill.setBillType(getBillType().getValue());
 		beforeEdit(model);
@@ -71,7 +72,7 @@ public abstract class BillController {
 	}
 	
 	@RequestMapping("edit")
-	public String edit(Long billId,Model model){
+	public String edit(Long billId,Model model) throws Exception{
 		bill = billService.findById(billId);
 		model.addAttribute("bill", bill);
 		beforeEdit(model);
@@ -79,7 +80,7 @@ public abstract class BillController {
 	}
 	
 	@RequestMapping("save")
-	public String save(@ModelAttribute Bill bill,Model model){
+	public String save(@ModelAttribute Bill bill,Model model) throws Exception{
 		this.bill = bill;
 		beforeSave(model);
 		billService.saveOrUpdateModel(bill);
@@ -87,14 +88,14 @@ public abstract class BillController {
 	}
 	
 	@RequestMapping("delete")
-	public String delete(Long billId,Model model){
+	public String delete(Long billId,Model model) throws Exception{
 		beforeDelete(model);
 		billService.deleteBillCascade(billId);
 		return list(model);
 	}
 	
 	@RequestMapping("editDetail")
-	public String editDetail(Long billId,Model model){
+	public String editDetail(Long billId,Model model) throws Exception{
 		bill = billService.findById(billId);
 		List<Drug> drugList = drugService.findAll();
 		Map<Long,String> drugMap = new HashMap<Long,String>(drugList.size());
@@ -114,7 +115,7 @@ public abstract class BillController {
 	}
 	
 	@RequestMapping("saveDetails")
-	public String saveDetails(@ModelAttribute Bill bill,Model model,HttpServletRequest request){
+	public String saveDetails(@ModelAttribute Bill bill,Model model,HttpServletRequest request) throws Exception{
 		String[] detailIds = request.getParameterValues("detailId");
 		String[] drugIds = request.getParameterValues("drugId");
 		String[] providers = request.getParameterValues("createUser");

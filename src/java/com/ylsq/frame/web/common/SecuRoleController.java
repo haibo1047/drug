@@ -63,7 +63,7 @@ public class SecuRoleController extends CommonController<SecuRole> {
 	}
 
 	@RequestMapping("configUser")
-	public String configUser(Long id,Model model){
+	public String configUser(Long id,Model model) throws Exception{
 		List<SecuUser> selectedUsers = secuUserService.findListByRoleId(id);
 		Set<Long> selectIds = new HashSet<Long>();
 		for(SecuUser u : selectedUsers){
@@ -84,13 +84,13 @@ public class SecuRoleController extends CommonController<SecuRole> {
 	}
 	
 	@RequestMapping("saveConfigUser")
-	public String saveConfigUser(@ModelAttribute SecuRole role,Model model){
+	public String saveConfigUser(@ModelAttribute SecuRole role,Model model) throws Exception{
 		secuUserRoleService.saveUserRole(role.getId(),role.getUnselect(),role.getSelected());
 		return configUser(role.getId(),model);
 	}
 	
 	@RequestMapping("configMenu")
-	public String configMenu(Long id,Model model){
+	public String configMenu(Long id,Model model) throws Exception{
 		List<SecuMenu> selectedMenus = secuMenuService.findListByRoleId(id);
 		Set<Long> existIds = new HashSet<Long>();
 		for(SecuMenu m : selectedMenus){
@@ -111,7 +111,7 @@ public class SecuRoleController extends CommonController<SecuRole> {
 	}
 	
 	@RequestMapping("saveConfigMenu")
-	public String saveConfigRole(@ModelAttribute SecuRole role,Model model){
+	public String saveConfigRole(@ModelAttribute SecuRole role,Model model) throws Exception{
 		secuRoleMenuService.saveRoleMenu(role.getId(),role.getUnselect(),role.getSelected());
 		return configMenu(role.getId(), model);
 	}

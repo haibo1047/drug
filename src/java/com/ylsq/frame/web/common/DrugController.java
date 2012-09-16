@@ -61,20 +61,20 @@ public class DrugController extends CommonController<Drug>{
 	}
 
 	@Override
-	protected void beforeEdit(Model model) {
+	protected void beforeEdit(Model model){
 		List<Provider> providers = providerService.findAll();
 		model.addAttribute("providers", providers);
 		model.addAttribute("drugTypes", DrugType.values());
 	}
 	
 	@RequestMapping("importDrug")
-	public String importDrug(Model model){
+	public String importDrug(Model model) throws Exception{
 		objectDir(model);
 		return dir()+"/importDrug";
 	}
 	
 	@RequestMapping("doImport")
-	public String doImport(@RequestParam("file") MultipartFile file,Model model){
+	public String doImport(@RequestParam("file") MultipartFile file,Model model) throws Exception{
 		try{
 			HSSFWorkbook book = new HSSFWorkbook(file.getInputStream());
 			drugService.parseExcel(book);
@@ -85,7 +85,7 @@ public class DrugController extends CommonController<Drug>{
 	}
 	
 	@RequestMapping("exportDrug")
-	public void exportDrug(HttpServletResponse response){
+	public void exportDrug(HttpServletResponse response) throws Exception{
 		HSSFWorkbook book = new HSSFWorkbook();
 		drugService.exportExcel(book);
 		exportFile(response, book);
