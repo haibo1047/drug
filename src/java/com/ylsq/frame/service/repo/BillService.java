@@ -10,10 +10,12 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.ylsq.frame.dao.repo.BillDetailMapper;
 import com.ylsq.frame.dao.repo.BillMapper;
 import com.ylsq.frame.dict.common.BillType;
+import com.ylsq.frame.dict.common.Options;
+import com.ylsq.frame.dict.common.WarehouseType;
 import com.ylsq.frame.model.repo.Bill;
+import com.ylsq.frame.model.repo.BillDetail;
 import com.ylsq.frame.model.repo.BillExample;
 import com.ylsq.frame.service.common.CommonService;
 import com.ylsq.frame.utils.DateHelper;
@@ -27,7 +29,9 @@ public class BillService implements CommonService<Bill> {
 	@Resource
 	private BillMapper billMapper;
 	@Resource
-	private BillDetailMapper billDetailMapper;
+	private BillDetailService billDetailService;
+	@Resource
+	private DrugRepositoryService drugRepositoryService;
 
 	@Override
 	public List<Bill> findAll() {
@@ -57,7 +61,7 @@ public class BillService implements CommonService<Bill> {
 	}
 
 	public int deleteBillCascade(Long billId){
-		billDetailMapper.deleteByBillId(billId);
+		billDetailService.deleteByBillId(billId);
 		return billMapper.deleteByPrimaryKey(billId);
 	}
 	public List<Bill> findListByType(BillType billType){
@@ -69,5 +73,25 @@ public class BillService implements CommonService<Bill> {
 	public String nextOneBillNo(BillType billType){
 		int no = billMapper.nextOneBillNo(billType.getValue());
 		return billType.getPrefix()+DateHelper.formatNow(null)+StringUtils.leftPad(no+"",4,"0");
+	}
+	
+	public int avaliableBill(Long billId){
+		Bill record = new Bill();
+		record.setId(billId);
+		record.setAvailable(Options.YES.getValue());
+		return billMapper.updateByPrimaryKeySelective(record);
+	}
+	
+	public int dualConfirmBill(Long billId)throws Exception{
+		avaliableBill(billId);
+		Bill bill = findById(billId);
+		List<BillDetail> details = billDetailService.findListByBillId(billId);
+		BillType billType = BillType.convert(bill.getBillType());
+		int r = 0;
+		if(WarehouseType.IN == billType.getWarehouseType())
+			r = drugRepositoryService.dualEnterWarehouse(bill, details);
+		else
+			r = drugRepositoryService.dualOutWarehouse(bill,details);
+		return r;
 	}
 }

@@ -9,7 +9,8 @@
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="expires" content="0">
+	<link href='<c:url value="/css/common.css"/>' rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="<c:url value="/js/jquery-1.7.2.min.js"/>"></script>
   </head>
 <script>
@@ -20,22 +21,6 @@ function deleteBill(billId){
 function confirmBill(billId){
 	if(confirm("确认此单据吗？") == true)
 		location = "confirmBill.do?billId="+billId;
-		/*
-		$.ajax({
-			type:"POST",
-			url:"confirmBill.do",
-			data:{billId:billId},
-			dataType:"text",
-			success:function(text){
-				if(text == "1"){
-					alert("操作成功！");
-				}
-				else{
-					alert("操作失败！");
-				}
-			}
-		})
-		*/
 }
 </script>
   <body>
@@ -45,7 +30,6 @@ function confirmBill(billId){
 			<ec:column property="id" alias="ID"/>
 			<ec:column property="billNo" alias="单号"/>
 			<ec:column property="extraInfo" alias="仓库" cell="com.ylsq.frame.sh.MapCell" parse="repositoryName"/>
-			<ec:column property="extraInfo" alias="供应商" cell="com.ylsq.frame.sh.MapCell" parse="providerName"/>
 			<ec:column property="createDate" alias="创建时间" cell="date" format="yyyy-MM-dd HH:mm:ss"/>
 			<ec:column property="createUser" alias="创建人"/>
 			<ec:column property="extraInfo" alias="是否生效" cell="com.ylsq.frame.sh.MapCell" parse="available"/>

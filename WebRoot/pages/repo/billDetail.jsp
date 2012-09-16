@@ -77,6 +77,9 @@ function datepick(){
 		regist();
 		datepick();
 	}
+	function deleteRow(o){
+		alert(o.parent.parent);
+	}
 </script>
 	<body>
   	<form:form action="saveDetails.do" modelAttribute="bill" name="f1" method="post">
@@ -98,6 +101,7 @@ function datepick(){
 					<td>
 						数量
 					</td>
+					<td>删除</td>
 				</tr>
 				<tr id="copyTr" style="display:none">
 					<td>
@@ -115,7 +119,7 @@ function datepick(){
 						<input type="hidden" name="detailId"/>
 					</td>
 					<td>
-						<a href="#" onclick="deleteRow(this)"></a>
+						<a href="#" onclick="deleteRow(this)">delete</a>
 					</td>
 				</tr>
 				<c:forEach items="${details}" var="billDetail">
@@ -137,6 +141,9 @@ function datepick(){
 						</td>
 						<td>
 							<input type="text" name="drugCount" value="${billDetail.drugCount}">
+						</td>
+						<td>
+							<a href="#" onclick="deleteRow(this)">delete</a>
 						</td>
 					</tr>
 				</c:forEach>

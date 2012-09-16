@@ -3,7 +3,6 @@
  */
 package com.ylsq.frame.web.repo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -26,6 +24,8 @@ import com.ylsq.frame.model.common.Drug;
 import com.ylsq.frame.model.repo.Bill;
 import com.ylsq.frame.model.repo.BillDetail;
 import com.ylsq.frame.service.common.DrugService;
+import com.ylsq.frame.service.common.ProviderService;
+import com.ylsq.frame.service.common.RepositoryService;
 import com.ylsq.frame.service.repo.BillDetailService;
 import com.ylsq.frame.service.repo.BillService;
 import com.ylsq.frame.utils.DateHelper;
@@ -43,6 +43,10 @@ public abstract class BillController {
 	protected BillDetailService billDetailService;
 	@Autowired
 	protected DrugService drugService;
+	@Autowired
+	protected ProviderService providerService;
+	@Autowired
+	protected RepositoryService repositoryService;
 	
 	protected Bill bill;
 	
@@ -141,9 +145,9 @@ public abstract class BillController {
 	}
 	
 	@RequestMapping("confirmBill")
-	public void confirmBill(Long billId,HttpServletResponse resp) throws IOException{
-		logger.debug(billId+"...");
-		resp.getWriter().append("1");
+	public String confirmBill(Long billId,Model model) throws Exception{
+		billService.dualConfirmBill(billId);
+		return list(model);
 	}
 	
 	protected abstract BillType getBillType();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ylsq.frame.dao.common.DrugRepositoryMapper" >
-  <resultMap id="BaseResultMap" type="com.ylsq.frame.model.common.DrugRepository" >
+<mapper namespace="com.ylsq.frame.dao.repo.DrugRepositoryMapper" >
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.model.repo.DrugRepository" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="BATCH_NUM" property="batchNum" jdbcType="VARCHAR" />
     <result column="DRUG_NUMBER" property="drugNumber" jdbcType="INTEGER" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List" >
     ID, BATCH_NUM, DRUG_NUMBER, DRUG_PRICE, PRODUCE_DATE, DRUG_ID, REPOSITORY_ID
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.common.DrugRepositoryExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.repo.DrugRepositoryExample" >
     select
     <if test="distinct" >
       distinct
@@ -95,13 +95,13 @@
     delete from drug_repository
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ylsq.frame.model.common.DrugRepositoryExample" >
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.model.repo.DrugRepositoryExample" >
     delete from drug_repository
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+  <insert id="insert" parameterType="com.ylsq.frame.model.repo.DrugRepository" >
     insert into drug_repository (ID, BATCH_NUM, DRUG_NUMBER, 
       DRUG_PRICE, PRODUCE_DATE, DRUG_ID, 
       REPOSITORY_ID)
@@ -109,7 +109,7 @@
       #{drugPrice,jdbcType=DOUBLE}, #{produceDate,jdbcType=TIMESTAMP}, #{drugId,jdbcType=BIGINT}, 
       #{repositoryId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+  <insert id="insertSelective" parameterType="com.ylsq.frame.model.repo.DrugRepository" >
     insert into drug_repository
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ylsq.frame.model.common.DrugRepositoryExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ylsq.frame.model.repo.DrugRepositoryExample" resultType="java.lang.Integer" >
     select count(*) from drug_repository
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.model.repo.DrugRepository" >
     update drug_repository
     <set >
       <if test="batchNum != null" >
@@ -230,7 +230,7 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.model.common.DrugRepository" >
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.model.repo.DrugRepository" >
     update drug_repository
     set BATCH_NUM = #{batchNum,jdbcType=VARCHAR},
       DRUG_NUMBER = #{drugNumber,jdbcType=INTEGER},

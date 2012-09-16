@@ -22,8 +22,14 @@ public class Drug implements PK{
     private String simpleSpell;
 
     private Long providerId;
+    
 
-    public Long getId() {
+    public String getDrugDescript() {
+		return getDrugName()+"-"+getDrugForm()+getProductModel();
+	}
+
+
+	public Long getId() {
         return id;
     }
 

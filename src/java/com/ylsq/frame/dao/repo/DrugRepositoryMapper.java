@@ -1,7 +1,7 @@
-package com.ylsq.frame.dao.common;
+package com.ylsq.frame.dao.repo;
 
-import com.ylsq.frame.model.common.DrugRepository;
-import com.ylsq.frame.model.common.DrugRepositoryExample;
+import com.ylsq.frame.model.repo.DrugRepository;
+import com.ylsq.frame.model.repo.DrugRepositoryExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

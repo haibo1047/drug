@@ -1,4 +1,4 @@
-package com.ylsq.frame.model.common;
+package com.ylsq.frame.model.repo;
 
 import java.util.ArrayList;
 import java.util.Date;
