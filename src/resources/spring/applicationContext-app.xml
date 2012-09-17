@@ -15,6 +15,9 @@
 	
 	<!--<context:property-placeholder location="WEB-INF/classes/datasource.properties" ignore-unresolvable="true"/>
 	-->
+	 <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">  
+        <property name="basename" value="messages"/>  
+    </bean> 
 	<context:property-placeholder location="WEB-INF/classes/frame.properties" ignore-unresolvable="true"/>
 	<bean id="propertyPlaceholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

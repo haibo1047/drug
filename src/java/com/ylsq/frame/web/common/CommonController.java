@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -65,8 +67,13 @@ public abstract class CommonController<T extends PK> {
 	}
 	
 	@RequestMapping("/save")
-	public String save(@ModelAttribute T obj,Model model) throws Exception{
+	public String save(@Validated @ModelAttribute T obj,BindingResult result,Model model) throws Exception{
 		object = obj;
+		if(result.hasErrors()){
+//			model.addAttribute(result);
+			model.addAttribute("object", object);
+			return getEditPath();
+		}
 		beforeSave();
 		getModelService().saveOrUpdateModel(object);
 		return list(model);

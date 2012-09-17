@@ -5,31 +5,34 @@
 <html>
   <head>
     
-    <title>My JSP 'listUser.jsp' starting page</title>
+    <title>editMenu..</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
-	<link href='<c:url value="/css/common.css"/>' rel="stylesheet" type="text/css">
   </head>
   
   <body>
-  	<form:form action="ssave.do" modelAttribute="object" name="f1" method="post">
-  		增加用户
+  	<form:form action="save.do" modelAttribute="object" name="f1" method="post">
+  		增加菜单
   		<div class="clum_title"></div>
+  		<form:errors path="*"></form:errors>
 		<table border="0" cellpadding="0" cellspacing="0" class="mainTable">
   			<form:hidden path="id"/>
 			<tr>
 				<td class="fm_left">路径：</td>
 				<td>
 					<form:input path="menuPath"/>
-					<form:errors path="menuPath"></form:errors>
+				</td>
+				<td>
+					<form:errors path="menuPath" cssClass="error" />
 				</td>
 			</tr>
 			<tr>
 				<td class="fm_left">地址：</td>
 				<td>
 					<form:input path="menuUrl"/>
+					<form:errors path="menuUrl" cssClass="error" />
 				</td>
 			</tr>
 			<tr>
