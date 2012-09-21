@@ -29,6 +29,7 @@ import com.ylsq.frame.service.common.RepositoryService;
 import com.ylsq.frame.service.repo.BillDetailService;
 import com.ylsq.frame.service.repo.BillService;
 import com.ylsq.frame.utils.DateHelper;
+import com.ylsq.frame.utils.StringHelper;
 
 /**
  * @author hopper
@@ -122,14 +123,16 @@ public abstract class BillController {
 		String[] providers = request.getParameterValues("createUser");
 		String[] productDates = request.getParameterValues("productDate");
 		String[] drugCounts = request.getParameterValues("drugCount");
+		String[] drugPrices = request.getParameterValues("drugPrice");
 		List<BillDetail> details = new ArrayList<BillDetail>();
 		for(int index =1;index<providers.length;index++){
 			String sp = providers[index];
 			String sd = drugIds[index];
 			String pd = productDates[index];
 			String dc = drugCounts[index];
+			String dp = drugPrices[index];
 			Date date = DateHelper.parseDate(pd);
-			if(StringUtils.isNumeric(sp) && StringUtils.isNumeric(sd) && StringUtils.isNumeric(dc) && date!=null){
+			if(StringUtils.isNumeric(sp) && StringUtils.isNumeric(sd) && StringUtils.isNumeric(dc) && StringHelper.isNumberic(dp) && date!=null){
 				BillDetail detail = new BillDetail();
 				if(StringUtils.isNotBlank(detailIds[index]) && StringUtils.isNumeric(detailIds[index])){
 					detail.setId(Long.parseLong(detailIds[index]));
@@ -137,6 +140,7 @@ public abstract class BillController {
 				detail.setProviderId(Long.parseLong(sp));
 				detail.setDrugId(Long.parseLong(sd));
 				detail.setDrugCount(Integer.parseInt(dc));
+				detail.setDrugPrice(Double.parseDouble(dp));
 				detail.setProductDate(date);
 				detail.setBillId(bill.getId());
 				details.add(detail);

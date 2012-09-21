@@ -79,27 +79,35 @@ public class DrugRepositoryService implements CommonService<DrugRepository> {
 	
 	public int dualEnterWarehouse(Bill bill,List<BillDetail> details){
 		List<DrugRepository> exists = findListByRepositoryId(bill.getRepositoryId());
-		Map<Long,Map<Date,DrugRepository>> map = new HashMap<Long, Map<Date,DrugRepository>>();
+		Map<Long,Map<Date,Map<Double,DrugRepository>>> map = new HashMap<Long, Map<Date,Map<Double,DrugRepository>>>();
 		for(DrugRepository dp: exists){
 			Long drugId = dp.getDrugId();
 			Date productDate = DateUtils.truncate(dp.getProduceDate(), Calendar.DAY_OF_MONTH);
-			Map<Date,DrugRepository> dateMap = map.get(drugId);
+			Map<Date,Map<Double,DrugRepository>> dateMap = map.get(drugId);
 			if(dateMap == null){
-				dateMap = new HashMap<Date, DrugRepository>();
+				dateMap = new HashMap<Date, Map<Double,DrugRepository>>();
 				map.put(drugId, dateMap);
 			}
-			dateMap.put(productDate, dp);
+			Map<Double,DrugRepository> priceMap = dateMap.get(productDate);
+			if(priceMap == null){
+				priceMap = new HashMap<Double, DrugRepository>();
+				dateMap.put(productDate, priceMap);
+			}
+			priceMap.put(dp.getDrugPrice(), dp);
 		}
 		List<DrugRepository> data = new ArrayList<DrugRepository>();
 		for(BillDetail bd : details){
 			DrugRepository dp = null;
-			Map<Date,DrugRepository> dateMap = map.get(bd.getDrugId());
-			if(dateMap != null)
-				dp = dateMap.get(DateUtils.truncate(bd.getProductDate(), Calendar.DAY_OF_MONTH));
+			Map<Date,Map<Double,DrugRepository>> dateMap = map.get(bd.getDrugId());
+			if(dateMap != null){
+				Map<Double,DrugRepository> priceMap = dateMap.get(DateUtils.truncate(bd.getProductDate(), Calendar.DAY_OF_MONTH));
+				dp = priceMap.get(bd.getDrugPrice());
+			}
 			if(dp == null){
 				dp = new DrugRepository();
 				dp.setDrugId(bd.getDrugId());
 				dp.setDrugNumber(0);
+				dp.setDrugPrice(bd.getDrugPrice());
 				dp.setProduceDate(bd.getProductDate());
 				dp.setRepositoryId(bill.getRepositoryId());
 			}

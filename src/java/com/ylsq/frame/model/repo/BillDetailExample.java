@@ -225,6 +225,66 @@ public class BillDetailExample {
             return (Criteria) this;
         }
 
+        public Criteria andDrugPriceIsNull() {
+            addCriterion("DRUG_PRICE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceIsNotNull() {
+            addCriterion("DRUG_PRICE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceEqualTo(Double value) {
+            addCriterion("DRUG_PRICE =", value, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceNotEqualTo(Double value) {
+            addCriterion("DRUG_PRICE <>", value, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceGreaterThan(Double value) {
+            addCriterion("DRUG_PRICE >", value, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("DRUG_PRICE >=", value, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceLessThan(Double value) {
+            addCriterion("DRUG_PRICE <", value, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceLessThanOrEqualTo(Double value) {
+            addCriterion("DRUG_PRICE <=", value, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceIn(List<Double> values) {
+            addCriterion("DRUG_PRICE in", values, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceNotIn(List<Double> values) {
+            addCriterion("DRUG_PRICE not in", values, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceBetween(Double value1, Double value2) {
+            addCriterion("DRUG_PRICE between", value1, value2, "drugPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDrugPriceNotBetween(Double value1, Double value2) {
+            addCriterion("DRUG_PRICE not between", value1, value2, "drugPrice");
+            return (Criteria) this;
+        }
+
         public Criteria andProductDateIsNull() {
             addCriterion("PRODUCT_DATE is null");
             return (Criteria) this;

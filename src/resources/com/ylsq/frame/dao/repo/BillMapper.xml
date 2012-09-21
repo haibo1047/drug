@@ -9,7 +9,6 @@
     <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
     <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
     <result column="REPOSITORY_ID" property="repositoryId" jdbcType="BIGINT" />
-    <result column="PROVIDER_ID" property="providerId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, AVAILABLE, BILL_NO, BILL_TYPE, CREATE_DATE, CREATE_USER, REPOSITORY_ID, PROVIDER_ID
+    ID, AVAILABLE, BILL_NO, BILL_TYPE, CREATE_DATE, CREATE_USER, REPOSITORY_ID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.repo.BillExample" >
     select
@@ -105,10 +104,10 @@
   <insert id="insert" parameterType="com.ylsq.frame.model.repo.Bill" >
     insert into bill (ID, AVAILABLE, BILL_NO, 
       BILL_TYPE, CREATE_DATE, CREATE_USER, 
-      REPOSITORY_ID, PROVIDER_ID)
+      REPOSITORY_ID)
     values (#{id,jdbcType=BIGINT}, #{available,jdbcType=INTEGER}, #{billNo,jdbcType=VARCHAR}, 
       #{billType,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{repositoryId,jdbcType=BIGINT}, #{providerId,jdbcType=BIGINT})
+      #{repositoryId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.model.repo.Bill" >
     insert into bill
@@ -134,9 +133,6 @@
       <if test="repositoryId != null" >
         REPOSITORY_ID,
       </if>
-      <if test="providerId != null" >
-        PROVIDER_ID,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -159,9 +155,6 @@
       </if>
       <if test="repositoryId != null" >
         #{repositoryId,jdbcType=BIGINT},
-      </if>
-      <if test="providerId != null" >
-        #{providerId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -195,9 +188,6 @@
       <if test="record.repositoryId != null" >
         REPOSITORY_ID = #{record.repositoryId,jdbcType=BIGINT},
       </if>
-      <if test="record.providerId != null" >
-        PROVIDER_ID = #{record.providerId,jdbcType=BIGINT},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -211,8 +201,7 @@
       BILL_TYPE = #{record.billType,jdbcType=INTEGER},
       CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
       CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
-      REPOSITORY_ID = #{record.repositoryId,jdbcType=BIGINT},
-      PROVIDER_ID = #{record.providerId,jdbcType=BIGINT}
+      REPOSITORY_ID = #{record.repositoryId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -238,9 +227,6 @@
       <if test="repositoryId != null" >
         REPOSITORY_ID = #{repositoryId,jdbcType=BIGINT},
       </if>
-      <if test="providerId != null" >
-        PROVIDER_ID = #{providerId,jdbcType=BIGINT},
-      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -251,10 +237,10 @@
       BILL_TYPE = #{billType,jdbcType=INTEGER},
       CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
       CREATE_USER = #{createUser,jdbcType=VARCHAR},
-      REPOSITORY_ID = #{repositoryId,jdbcType=BIGINT},
-      PROVIDER_ID = #{providerId,jdbcType=BIGINT}
+      REPOSITORY_ID = #{repositoryId,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  
   
   <select id="nextOneBillNo" parameterType="java.util.HashMap" resultType="java.lang.Integer">
   	select case when nid is null then 1 else nid end from 

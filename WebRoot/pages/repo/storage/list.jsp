@@ -45,7 +45,6 @@ function confirmBill(billId){
 			<ec:column property="id" alias="ID"/>
 			<ec:column property="billNo" alias="单号"/>
 			<ec:column property="extraInfo" alias="仓库" cell="com.ylsq.frame.sh.MapCell" parse="repositoryName"/>
-			<ec:column property="extraInfo" alias="供应商" cell="com.ylsq.frame.sh.MapCell" parse="providerName"/>
 			<ec:column property="createDate" alias="创建时间" cell="date" format="yyyy-MM-dd HH:mm:ss"/>
 			<ec:column property="createUser" alias="创建人"/>
 			<ec:column property="extraInfo" alias="是否生效" cell="com.ylsq.frame.sh.MapCell" parse="available"/>

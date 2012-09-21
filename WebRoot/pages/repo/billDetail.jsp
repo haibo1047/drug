@@ -99,6 +99,9 @@ function datepick(){
 						生产日期
 					</td>
 					<td>
+						单价
+					</td>
+					<td>
 						数量
 					</td>
 					<td>删除</td>
@@ -113,6 +116,9 @@ function datepick(){
 					</td>
 					<td>
 						<input type="text" name="productDate" readonly="readonly" class="datepicker" value="">
+					</td>
+					<td>
+						<input type="text" name="drugPrice">
 					</td>
 					<td>
 						<input type="text" name="drugCount">
@@ -138,6 +144,9 @@ function datepick(){
 						</td>
 						<td>
 							<input type="text" readonly="readonly" class="datepicker" name="productDate" value="${billDetail.extraInfo.productDate}">
+						</td>
+						<td>
+							<input type="text" name="drugPrice" value="${billDetail.drugPrice}">
 						</td>
 						<td>
 							<input type="text" name="drugCount" value="${billDetail.drugCount}">

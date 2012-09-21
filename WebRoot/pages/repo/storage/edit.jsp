@@ -31,12 +31,6 @@ function gotoback() {
 					<form:select path="repositoryId" items="${repositoryList}" itemLabel="repositoryName" itemValue="id"></form:select>
 				</td>
 			</tr>
-			<tr>
-				<td>供应商名称:</td>
-				<td>
-					<form:select path="providerId" items="${providerList}" itemLabel="providerName" itemValue="id"></form:select>
-				</td>
-			</tr>
 			<tr class="g_line"> <td colspan="2"></td></tr>
 			<tr>
 				<td class="fm_left"></td>

@@ -15,6 +15,7 @@
     	<ec:row>
     		<ec:column property="extraInfo" alias="药品"  cell="com.ylsq.frame.sh.MapCell" parse="drugName"/>
     		<ec:column property="extraInfo" alias="仓库"  cell="com.ylsq.frame.sh.MapCell" parse="repositoryName"/>
+    		<ec:column property="drugPrice" alias="入库价"></ec:column>
     		<ec:column property="drugNumber" alias="数量"></ec:column>
     		<ec:column property="produceDate" alias="生产日期" cell="date" format="yyyy-MM-dd"></ec:column>
     	</ec:row>

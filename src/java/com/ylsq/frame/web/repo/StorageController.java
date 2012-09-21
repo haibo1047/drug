@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ylsq.frame.dict.common.BillType;
 import com.ylsq.frame.dict.common.Options;
-import com.ylsq.frame.model.common.Provider;
 import com.ylsq.frame.model.common.Repository;
 import com.ylsq.frame.model.repo.Bill;
 import com.ylsq.frame.utils.SecurityUtils;
@@ -36,19 +35,14 @@ public class StorageController extends BillController{
 	@Override
 	protected List<Bill> customList() {
 		List<Bill> storageList = super.customList();
-		List<Provider> providers = providerService.findAll();
 		List<Repository> repositorys = repositoryService.findAll();
 		Map<Long,String> repoMap = new HashMap<Long,String>();
-		Map<Long,String> provMap = new HashMap<Long,String>();
 		for(Repository repo : repositorys)
 			repoMap.put(repo.getId(), repo.getRepositoryName());
-		for(Provider prov : providers)
-			provMap.put(prov.getId(),prov.getProviderName());
 		for(Bill b : storageList){
 			if(b.getExtraInfo() == null){
 				b.setExtraInfo(new HashMap<String, String>());
 			}
-			b.getExtraInfo().put("providerName", provMap.get(b.getProviderId()));
 			b.getExtraInfo().put("repositoryName", repoMap.get(b.getRepositoryId()));
 			if(b.getAvailable() != null && Options.YES.getValue().equals(b.getAvailable()))
 				b.getExtraInfo().put("available", Options.YES.getLabel());

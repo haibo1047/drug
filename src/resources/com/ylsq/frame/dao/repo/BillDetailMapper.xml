@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ylsq.frame.model.repo.BillDetail" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="DRUG_COUNT" property="drugCount" jdbcType="INTEGER" />
+    <result column="DRUG_PRICE" property="drugPrice" jdbcType="DOUBLE" />
     <result column="PRODUCT_DATE" property="productDate" jdbcType="TIMESTAMP" />
     <result column="BILL_ID" property="billId" jdbcType="BIGINT" />
     <result column="DRUG_ID" property="drugId" jdbcType="BIGINT" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, DRUG_COUNT, PRODUCT_DATE, BILL_ID, DRUG_ID, PROVIDER_ID
+    ID, DRUG_COUNT, DRUG_PRICE, PRODUCT_DATE, BILL_ID, DRUG_ID, PROVIDER_ID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ylsq.frame.model.repo.BillDetailExample" >
     select
@@ -101,12 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.model.repo.BillDetail" >
-    insert into bill_detail (ID, DRUG_COUNT, PRODUCT_DATE, 
-      BILL_ID, DRUG_ID, PROVIDER_ID
-      )
-    values (#{id,jdbcType=BIGINT}, #{drugCount,jdbcType=INTEGER}, #{productDate,jdbcType=TIMESTAMP}, 
-      #{billId,jdbcType=BIGINT}, #{drugId,jdbcType=BIGINT}, #{providerId,jdbcType=BIGINT}
-      )
+    insert into bill_detail (ID, DRUG_COUNT, DRUG_PRICE, 
+      PRODUCT_DATE, BILL_ID, DRUG_ID, 
+      PROVIDER_ID)
+    values (#{id,jdbcType=BIGINT}, #{drugCount,jdbcType=INTEGER}, #{drugPrice,jdbcType=DOUBLE}, 
+      #{productDate,jdbcType=TIMESTAMP}, #{billId,jdbcType=BIGINT}, #{drugId,jdbcType=BIGINT}, 
+      #{providerId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.model.repo.BillDetail" >
     insert into bill_detail
@@ -116,6 +117,9 @@
       </if>
       <if test="drugCount != null" >
         DRUG_COUNT,
+      </if>
+      <if test="drugPrice != null" >
+        DRUG_PRICE,
       </if>
       <if test="productDate != null" >
         PRODUCT_DATE,
@@ -136,6 +140,9 @@
       </if>
       <if test="drugCount != null" >
         #{drugCount,jdbcType=INTEGER},
+      </if>
+      <if test="drugPrice != null" >
+        #{drugPrice,jdbcType=DOUBLE},
       </if>
       <if test="productDate != null" >
         #{productDate,jdbcType=TIMESTAMP},
@@ -166,6 +173,9 @@
       <if test="record.drugCount != null" >
         DRUG_COUNT = #{record.drugCount,jdbcType=INTEGER},
       </if>
+      <if test="record.drugPrice != null" >
+        DRUG_PRICE = #{record.drugPrice,jdbcType=DOUBLE},
+      </if>
       <if test="record.productDate != null" >
         PRODUCT_DATE = #{record.productDate,jdbcType=TIMESTAMP},
       </if>
@@ -187,6 +197,7 @@
     update bill_detail
     set ID = #{record.id,jdbcType=BIGINT},
       DRUG_COUNT = #{record.drugCount,jdbcType=INTEGER},
+      DRUG_PRICE = #{record.drugPrice,jdbcType=DOUBLE},
       PRODUCT_DATE = #{record.productDate,jdbcType=TIMESTAMP},
       BILL_ID = #{record.billId,jdbcType=BIGINT},
       DRUG_ID = #{record.drugId,jdbcType=BIGINT},
@@ -200,6 +211,9 @@
     <set >
       <if test="drugCount != null" >
         DRUG_COUNT = #{drugCount,jdbcType=INTEGER},
+      </if>
+      <if test="drugPrice != null" >
+        DRUG_PRICE = #{drugPrice,jdbcType=DOUBLE},
       </if>
       <if test="productDate != null" >
         PRODUCT_DATE = #{productDate,jdbcType=TIMESTAMP},
@@ -219,6 +233,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.model.repo.BillDetail" >
     update bill_detail
     set DRUG_COUNT = #{drugCount,jdbcType=INTEGER},
+      DRUG_PRICE = #{drugPrice,jdbcType=DOUBLE},
       PRODUCT_DATE = #{productDate,jdbcType=TIMESTAMP},
       BILL_ID = #{billId,jdbcType=BIGINT},
       DRUG_ID = #{drugId,jdbcType=BIGINT},

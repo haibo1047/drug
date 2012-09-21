@@ -20,8 +20,6 @@ public class Bill implements PK{
 
     private Long repositoryId;
 
-    private Long providerId;
-    
     private Map<String,String> extraInfo;
 
     public Map<String, String> getExtraInfo() {
@@ -86,13 +84,5 @@ public class Bill implements PK{
 
     public void setRepositoryId(Long repositoryId) {
         this.repositoryId = repositoryId;
-    }
-
-    public Long getProviderId() {
-        return providerId;
-    }
-
-    public void setProviderId(Long providerId) {
-        this.providerId = providerId;
     }
 }

@@ -5,10 +5,13 @@ import java.util.Map;
 
 import com.ylsq.frame.model.common.PK;
 
+
 public class BillDetail implements PK{
     private Long id;
 
     private Integer drugCount;
+
+    private Double drugPrice;
 
     private Date productDate;
 
@@ -42,6 +45,14 @@ public class BillDetail implements PK{
 
     public void setDrugCount(Integer drugCount) {
         this.drugCount = drugCount;
+    }
+
+    public Double getDrugPrice() {
+        return drugPrice;
+    }
+
+    public void setDrugPrice(Double drugPrice) {
+        this.drugPrice = drugPrice;
     }
 
     public Date getProductDate() {

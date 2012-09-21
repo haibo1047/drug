@@ -18,6 +18,7 @@ public class StringHelper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println(Double.parseDouble("2."));
 		System.out.println(getSimpleSpell(""));
 		System.out.println(firstCharUpper(" aAc"));
 		Md5PasswordEncoder enc = new Md5PasswordEncoder();
@@ -57,4 +58,22 @@ public class StringHelper {
 		}
 		return null;
 	}
+	
+	public static boolean isNumberic(CharSequence cs) {
+        if (cs == null || cs.length() == 0) {
+            return false;
+        }
+        int sz = cs.length();
+        int dotCount = 0;
+        for (int i = 0; i < sz; i++) {
+        	if(cs.charAt(i) =='.'){
+        		dotCount++;
+        		continue;
+        	}
+            if (Character.isDigit(cs.charAt(i)) == false) {
+                return false;
+            }
+        }
+        return dotCount <= 1;
+    }
 }
