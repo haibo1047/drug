@@ -63,7 +63,11 @@ public class DrugService implements CommonService<Drug>{
 	}
 
 	public int saveAll(List<Drug> modelList) {
-		return 0;
+		int r = 0;
+		for(Drug drug: modelList){
+			r += saveOrUpdateModel(drug);
+		}
+		return r;
 	}
 
 	public boolean parseExcel(HSSFWorkbook book){
