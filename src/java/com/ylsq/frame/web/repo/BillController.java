@@ -61,7 +61,7 @@ public abstract class BillController {
 		model.addAttribute("billList", billList);
 		logger.debug(billList.size()+"");
 		logger.debug(billService.nextOneBillNo(getBillType()));
-		return prefix+getBillType().getBillPrefix()+"/list";
+		return prefix+"/list";
 	}
 	
 	@RequestMapping("add")
@@ -86,7 +86,8 @@ public abstract class BillController {
 		this.bill = bill;
 		beforeSave(model);
 		billService.saveOrUpdateModel(bill);
-		return list(model);
+		bill = billService.findBillByBillNo(bill.getBillNo());
+		return editDetail(bill.getId(), model);
 	}
 	
 	@RequestMapping("delete")

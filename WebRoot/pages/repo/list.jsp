@@ -9,7 +9,8 @@
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="expires" content="0">
+	<link href='<c:url value="/css/common.css"/>' rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="<c:url value="/js/jquery-1.7.2.min.js"/>"></script>
   </head>
 <script>
@@ -20,22 +21,6 @@ function deleteBill(billId){
 function confirmBill(billId){
 	if(confirm("确认此单据吗？") == true)
 		location = "confirmBill.do?billId="+billId;
-		/*
-		$.ajax({
-			type:"POST",
-			url:"confirmBill.do",
-			data:{billId:billId},
-			dataType:"text",
-			success:function(text){
-				if(text == "1"){
-					alert("操作成功！");
-				}
-				else{
-					alert("操作失败！");
-				}
-			}
-		})
-		*/
 }
 </script>
   <body>
@@ -49,10 +34,12 @@ function confirmBill(billId){
 			<ec:column property="createUser" alias="创建人"/>
 			<ec:column property="extraInfo" alias="是否生效" cell="com.ylsq.frame.sh.MapCell" parse="available"/>
 			<ec:column alias="操作" sortable="false">
-				<a href="edit.do?billId=${bill.id}">编辑</a>
-				<a href="#" onclick="deleteBill('${bill.id}')">删除</a>
 				<a href="editDetail.do?billId=${bill.id}">明细</a>
-				<a href="#" onclick="confirmBill('${bill.id}')">确认单据</a>
+				<c:if test="${bill.available == '0'}">
+					<a href="edit.do?billId=${bill.id}">编辑</a>
+					<a href="#" onclick="deleteBill('${bill.id}')">删除</a>
+					<a href="#" onclick="confirmBill('${bill.id}')">确认单据</a>
+				</c:if>
 			</ec:column>
 		</ec:row>
   	</ec:table>

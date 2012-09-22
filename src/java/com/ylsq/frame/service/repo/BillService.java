@@ -100,4 +100,13 @@ public class BillService implements CommonService<Bill> {
 			r = drugRepositoryService.dualOutWarehouse(bill,details);
 		return r;
 	}
+	
+	public Bill findBillByBillNo(String billNo){
+		BillExample example = new BillExample();
+		example.createCriteria().andBillNoEqualTo(billNo);
+		List<Bill> bills = billMapper.selectByExample(example);
+		if(bills.size() == 1)
+			return bills.get(0);
+		return null;
+	}
 }

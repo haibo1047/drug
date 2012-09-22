@@ -68,6 +68,7 @@ public class DrugRepositoryService implements CommonService<DrugRepository> {
 	public List<DrugRepository> findListByRepositoryId(Long repositoryId){
 		DrugRepositoryExample example = new DrugRepositoryExample();
 		example.createCriteria().andRepositoryIdEqualTo(repositoryId);
+		example.setOrderByClause(" produce_date ");
 		return drugRepositoryMapper.selectByExample(example);
 	}
 	
@@ -101,7 +102,8 @@ public class DrugRepositoryService implements CommonService<DrugRepository> {
 			Map<Date,Map<Double,DrugRepository>> dateMap = map.get(bd.getDrugId());
 			if(dateMap != null){
 				Map<Double,DrugRepository> priceMap = dateMap.get(DateUtils.truncate(bd.getProductDate(), Calendar.DAY_OF_MONTH));
-				dp = priceMap.get(bd.getDrugPrice());
+				if(priceMap != null)
+					dp = priceMap.get(bd.getDrugPrice());
 			}
 			if(dp == null){
 				dp = new DrugRepository();
@@ -119,32 +121,47 @@ public class DrugRepositoryService implements CommonService<DrugRepository> {
 	
 	public int dualOutWarehouse(Bill bill,List<BillDetail> details){
 		List<DrugRepository> exists = findListByRepositoryId(bill.getRepositoryId());
-		Map<Long,Map<Date,DrugRepository>> map = new HashMap<Long, Map<Date,DrugRepository>>();
+		Map<Long,Map<Date,List<DrugRepository>>> map = new HashMap<Long, Map<Date,List<DrugRepository>>>();
 		List<DrugRepository> data = new ArrayList<DrugRepository>();
 		for(DrugRepository dp: exists){
 			Long drugId = dp.getDrugId();
 			Date productDate = DateUtils.truncate(dp.getProduceDate(), Calendar.DAY_OF_MONTH);
-			Map<Date,DrugRepository> dateMap = map.get(drugId);
+			Map<Date,List<DrugRepository>> dateMap = map.get(drugId);
 			if(dateMap == null){
-				dateMap = new HashMap<Date, DrugRepository>();
+				dateMap = new HashMap<Date, List<DrugRepository>>();
 				map.put(drugId, dateMap);
 			}
-			dateMap.put(productDate, dp);
+			List<DrugRepository> dpList = dateMap.get(productDate);
+			if(dpList == null){
+				dpList = new ArrayList<DrugRepository>();
+				dateMap.put(productDate, dpList);
+			}
+			dpList.add(dp);
 		}
 		for(BillDetail bd : details){
-			DrugRepository dp = null;
-			Map<Date,DrugRepository> dateMap = map.get(bd.getDrugId());
+			int existsCnt = 0;
+			Map<Date,List<DrugRepository>> dateMap = map.get(bd.getDrugId());
+			List<DrugRepository> dpList = null;
 			if(dateMap != null){
-				dp = dateMap.get(DateUtils.truncate(bd.getProductDate(), Calendar.DAY_OF_MONTH));
+				dpList = dateMap.get(DateUtils.truncate(bd.getProductDate(), Calendar.DAY_OF_MONTH));
+				if(dpList != null)
+					for(DrugRepository elem : dpList)
+						existsCnt += elem.getDrugNumber();
 			}
-			if(dp == null || dp.getDrugNumber()-bd.getDrugCount()<0){
+			if(dpList == null || existsCnt-bd.getDrugCount()<0){
 				throw new RuntimeException("库存不足！");
 			}
-			dp.setDrugNumber(dp.getDrugNumber()-bd.getDrugCount());
-			if(dp.getDrugNumber() == 0)
-				deleteModel(dp.getId());
-			else
-				data.add(dp);
+			int outCnt = bd.getDrugCount();
+			for(DrugRepository dp : dpList){
+				if(dp.getDrugNumber() <= outCnt)
+					deleteModel(dp.getId());
+				else{
+					dp.setDrugNumber(dp.getDrugNumber()-outCnt);
+					data.add(dp);
+					break;
+				}
+				outCnt -= dp.getDrugNumber();
+			}
 		}
 		return saveAll(data);
 	}
