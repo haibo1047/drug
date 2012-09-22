@@ -163,9 +163,11 @@ function datepick(){
 			<tr>
 				<td class="fm_left"></td>
 				<td>
-					<span class="f_btn">
-						<input type="button" value="确认" onclick="f1.submit()" class="r_btn"/>
-					</span>
+					<c:if test="${bill.available == '0'}">
+						<span class="f_btn">
+							<input type="button" value="确认" onclick="f1.submit()" class="r_btn"/>
+						</span>
+					</c:if>
 					<span class="f_btn">
 						<input type="button" value="返回" onclick="gotoback()" class="r_btn"/>
 					</span>

@@ -69,6 +69,7 @@ public class BillService implements CommonService<Bill> {
 	public List<Bill> findListByType(BillType billType){
 		BillExample example = new BillExample();
 		example.createCriteria().andBillTypeEqualTo(billType.getValue());
+		example.setOrderByClause(" bill_no desc ");
 		return billMapper.selectByExample(example);
 	}
 	
