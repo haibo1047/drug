@@ -25,7 +25,9 @@ function resetPwd(id){
     		<ec:column property="username" alias="登录名"></ec:column>
     		<ec:column property="realName" alias="姓名"></ec:column>
     		<ec:column  alias="操作" sortable="false">
-				<a href="#" onclick="resetPwd('${user.id}')">重置密码</a>
+    			<security:authorize ifAnyGranted="RESETPASSWORD">
+					<a href="#" onclick="resetPwd('${user.id}')">重置密码</a>
+    			</security:authorize>
 				<a href="edit.do?id=${user.id}">编辑</a>
 				<a href="delete.do?id=${user.id}">删除</a>
     		</ec:column>
