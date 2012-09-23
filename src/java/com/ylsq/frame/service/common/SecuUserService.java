@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ylsq.frame.dao.common.SecuUserMapper;
 import com.ylsq.frame.model.common.SecuUser;
 import com.ylsq.frame.model.common.SecuUserExample;
+import com.ylsq.frame.utils.StringHelper;
 
 /**
  * @author hopper
@@ -65,5 +66,12 @@ public class SecuUserService implements CommonService<SecuUser>{
 	
 	public List<SecuUser> findListByRoleId(Long roleId){
 		return secuUserMapper.findListByRoleId(roleId);
+	}
+	
+	public int dualResetPassword(Long id,String pwd){
+		SecuUser record = new SecuUser();
+		record.setId(id);
+		record.setPassword(StringHelper.md5code(pwd));
+		return secuUserMapper.updateByPrimaryKeySelective(record);
 	}
 }

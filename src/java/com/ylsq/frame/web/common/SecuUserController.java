@@ -1,6 +1,7 @@
 package com.ylsq.frame.web.common;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -57,9 +58,10 @@ public class SecuUserController extends CommonController<SecuUser>{
 	}
 
 	@RequestMapping("savePassword")
-	public String savePassword(HttpServletRequest request) throws Exception{
-		logger.debug(request.getParameter("id"));
-		logger.debug(request.getParameter("pwd"));
-		return "0";
+	public void savePassword(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		String userId = request.getParameter("userId");
+		String pwd = request.getParameter("pwd");
+		int r = secuUserService.dualResetPassword(Long.parseLong(userId), pwd);
+		response.getWriter().write(r);
 	}
 }
