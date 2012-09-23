@@ -11,7 +11,12 @@
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
   </head>
-  
+<script>
+function deleteRecord(id){
+	if(confirm("确认要删除此记录吗？") == true)
+		location = "delete.do?id="+id;
+}
+</script>
   <body>
 	<a href="add.do">新增菜单</a>
 	<ec:table items="objectList" var="menu" imagePath="${ctx}/images/table/*.gif" action="list.do" filterable="false">
@@ -23,7 +28,7 @@
 			<ec:column property="menuOrder" alias="排序号"></ec:column>
 			<ec:column alias="操作" sortable="false">
 				<a href="edit.do?id=${menu.id}">编辑</a>
-				<a href="delete.do?id=${menu.id}">删除</a>
+				<a href="#" onclick="deleteRecord('${menu.id}')">删除</a>
 			</ec:column>
 		</ec:row>
 	</ec:table>

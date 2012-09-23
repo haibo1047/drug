@@ -11,7 +11,12 @@
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
   </head>
-  
+<script>
+function deleteRecord(id){
+	if(confirm("确认要删除此记录吗？") == true)
+		location = "delete.do?id="+id;
+}
+</script>
   <body>
 	<a href="add.do">新增</a>
   	<ec:table items="objectList" var="repo" imagePath="${ctx}/images/table/*.gif" action="list.do" filterable="false">
@@ -21,7 +26,7 @@
 			<ec:column property="repoAddress" alias="仓库地址"/>
 			<ec:column alias="操作" sortable="false">
 				<a href="edit.do?id=${repo.id}">编辑</a>
-				<a href="delete.do?id=${repo.id}">删除</a>
+				<a href="#" onclick="deleteRecord('${repo.id}')">删除</a>
 			</ec:column>
 		</ec:row>
   	</ec:table>

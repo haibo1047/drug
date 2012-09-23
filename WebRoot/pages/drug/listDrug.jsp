@@ -12,7 +12,12 @@
 	<meta http-equiv="expires" content="0">    
 	<link href='<c:url value="/css/common.css"/>' rel="stylesheet" type="text/css">
   </head>
-  
+<script>
+function deleteRecord(id){
+	if(confirm("确认要删除此记录吗？") == true)
+		location = "delete.do?id="+id;
+}
+</script>
   <body>
 	<a href="add.do">新增</a>
 	<a href="importDrug.do">导入</a>
@@ -32,7 +37,7 @@
     		<ec:column property="drugForm" alias="剂型"></ec:column>
     		<ec:column alias="操作" sortable="false">
 				<a href="edit.do?id=${drug.id}">修改</a>
-				<a href="delete.do?id=${drug.id}">删除</a>
+				<a href="#" onclick="deleteRecord('${drug.id}')">删除</a>
     		</ec:column>
     	</ec:row>
     </ec:table>

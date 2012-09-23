@@ -5,7 +5,7 @@
 <html>
   <head>
     
-    <title>My JSP 'listUser.jsp' starting page</title>
+    <title>用户列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -15,6 +15,10 @@
 <script>
 function resetPwd(id){
 	window.open("resetPassword.do?id="+id);
+}
+function deleteRecord(id){
+	if(confirm("确认要删除此记录吗？") == true)
+		location = "delete.do?id="+id;
 }
 </script>
   <body>
@@ -29,7 +33,7 @@ function resetPwd(id){
 					<a href="#" onclick="resetPwd('${user.id}')">重置密码</a>
     			</security:authorize>
 				<a href="edit.do?id=${user.id}">编辑</a>
-				<a href="delete.do?id=${user.id}">删除</a>
+				<a href="#" onclick="deleteRecord('${user.id}')">删除</a>
     		</ec:column>
     	</ec:row>
     </ec:table>

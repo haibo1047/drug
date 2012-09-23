@@ -12,7 +12,12 @@
 	<meta http-equiv="expires" content="0">    
 	<link href='<c:url value="/css/common.css"/>' rel="stylesheet" type="text/css">
   </head>
-  
+<script>
+function deleteRecord(id){
+	if(confirm("确认要删除此记录吗？") == true)
+		location = "delete.do?id="+id;
+}
+</script>
   <body>
 	<a href="add.do">新增</a>
     <ec:table items="objectList" var="role" action="list.do" imagePath="${ctx}/images/table/*.gif" filterable="false">
@@ -25,7 +30,7 @@
 				<a href="configUser.do?id=${role.id}">配置用户</a>
 				<a href="configMenu.do?id=${role.id}">配置菜单</a>
 				<a href="edit.do?id=${role.id}">编辑</a>
-				<a href="delete.do?id=${role.id}">删除</a>
+				<a href="#" onclick="deleteRecord('${role.id}')">删除</a>
     		</ec:column>
     	</ec:row>
     </ec:table>

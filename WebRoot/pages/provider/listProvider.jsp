@@ -12,7 +12,12 @@
 	<meta http-equiv="expires" content="0">    
 	<link href='<c:url value="/css/common.css"/>' rel="stylesheet" type="text/css">
   </head>
-  
+<script>
+function deleteRecord(id){
+	if(confirm("确认要删除此记录吗？") == true)
+		location = "delete.do?id="+id;
+}
+</script>
   <body>
 	<a href="add.do">新增</a>
     <ec:table items="objectList" var="provider" action="list.do" imagePath="${ctx}/images/table/*.gif" filterable="false">
@@ -23,7 +28,7 @@
     		<ec:column property="providerTel" alias="电话"></ec:column>
     		<ec:column  alias="操作" sortable="false">
 				<a href="edit.do?id=${provider.id}">编辑</a>
-				<a href="delete.do?id=${provider.id}">删除</a>
+				<a href="#" onclick="deleteRecord('${provider.id}')">删除</a>
     		</ec:column>
     	</ec:row>
     </ec:table>
