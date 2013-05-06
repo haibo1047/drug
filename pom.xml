@@ -7,16 +7,15 @@
   <name/>
   <description/>
   <build>
-    <sourceDirectory>${basedir}/src</sourceDirectory>
     <outputDirectory>${basedir}/WebRoot/WEB-INF/classes</outputDirectory>
     <resources>
-      <resource>
-        <directory>${basedir}/src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
+		<resource>
+			<directory>${basedir}/src/java </directory>
+		</resource>
+		<resource>
+			<directory>${basedir}/src/resources </directory>
+		</resource>
+	</resources>
     <plugins>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
