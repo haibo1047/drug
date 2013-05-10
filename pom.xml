@@ -1,40 +1,41 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>drug</groupId>
-  <artifactId>drug</artifactId>
-  <version>0.1</version>
-  <packaging>war</packaging>
-  <name/>
-  <description/>
-  <build>
-    <outputDirectory>${basedir}/WebRoot/WEB-INF/classes</outputDirectory>
-    <resources>
-		<resource>
-			<directory>${basedir}/src/java </directory>
-		</resource>
-		<resource>
-			<directory>${basedir}/src/resources </directory>
-		</resource>
-	</resources>
-    <plugins>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <webappDirectory>${basedir}/WebRoot</webappDirectory>
-          <warSourceDirectory>${basedir}/WebRoot</warSourceDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>drug</groupId>
+	<artifactId>drug</artifactId>
+	<version>0.1</version>
+	<packaging>war</packaging>
+	<name />
+	<description />
+	<build>
+		<outputDirectory>${basedir}/WebRoot/WEB-INF/classes</outputDirectory>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/java </directory>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/resources </directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webappDirectory>${basedir}/WebRoot</webappDirectory>
+					<warSourceDirectory>${basedir}/WebRoot</warSourceDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<springsecurity.version>3.0.5.RELEASE</springsecurity.version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
@@ -103,7 +104,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-	
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -115,7 +116,7 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.8</version>
 		</dependency>
-	
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -139,14 +140,14 @@
 			<version>1.2.16</version>
 			<scope>runtime</scope>
 		</dependency>
-	
+
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-	
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -165,7 +166,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
+
 		<!-- Apache Tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -179,7 +180,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-	
+
 		<!-- Joda Time -->
 		<dependency>
 			<groupId>joda-time</groupId>
