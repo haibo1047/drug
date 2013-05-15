@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd"
-	default-lazy-init="true">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:secu="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security http://www.springframework.org/schema//security/spring-security-3.0.xsd"
+	default-lazy-init="false">
 
-	<global-method-security secured-annotations="enabled" jsr250-annotations="enabled" pre-post-annotations="enabled"/>
+	<secu:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" pre-post-annotations="enabled"/>
 
 	<!--
 	<http pattern="/static/**" security="none" />
 	<http pattern="/expose/**" security="none" />
 	-->
-	<http>
-		<form-login default-target-url="/" login-processing-url="/security_check.do"
+	<secu:http>
+		<secu:form-login default-target-url="/" login-processing-url="/security_check.do"
 			login-page="/expose/login.do" authentication-failure-url="/expose/login.do?login_error=1" />
-		<logout logout-url="/security_logout.do" />
-		<remember-me />
-		<anonymous enabled="false"/>
-		<custom-filter ref="resourceSecurityInterceptor" after="LAST"/>
+		<secu:logout logout-url="/security_logout.do" />
+		<secu:remember-me />
+		<secu:anonymous enabled="false"/>
+		<secu:custom-filter ref="resourceSecurityInterceptor" after="LAST"/>
 		<!--<session-management invalid-session-url="/timeout.do">
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		</session-management>
-	--></http>
+	--></secu:http>
 	
-	<beans:bean id="resourceSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">    
-       <beans:property name="authenticationManager" ref="authenticationManager"/>    
-       <beans:property name="accessDecisionManager" ref="unanimousAccessDecisionManager"/>    
-       <beans:property name="objectDefinitionSource" ref="frameFilterInvocationSecurityMetadataSource" />    
-       <beans:property name="observeOncePerRequest" value="false" />    
-   </beans:bean>  
-	<beans:bean id="unanimousAccessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
-		<beans:property name="allowIfAllAbstainDecisions" value="false"></beans:property>
-		<beans:property name="decisionVoters" ref="roleVoter"></beans:property>
-	</beans:bean>
-	<beans:bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
-		<beans:property name="rolePrefix" value=""></beans:property>
-	</beans:bean>
+	<bean id="resourceSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">    
+       <property name="authenticationManager" ref="authenticationManager"/>    
+       <property name="accessDecisionManager" ref="unanimousAccessDecisionManager"/>    
+       <property name="objectDefinitionSource" ref="frameFilterInvocationSecurityMetadataSource" />    
+       <property name="observeOncePerRequest" value="false" />    
+   </bean>  
+	<bean id="unanimousAccessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+		<property name="allowIfAllAbstainDecisions" value="false"></property>
+		<property name="decisionVoters" ref="roleVoter"></property>
+	</bean>
+	<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
+		<property name="rolePrefix" value=""></property>
+	</bean>
 
-	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref="customUserDetailsService">
-			<password-encoder hash="md5" />
-		</authentication-provider>
-	</authentication-manager>
-</beans:beans>
+	<secu:authentication-manager alias="authenticationManager">
+		<secu:authentication-provider user-service-ref="customUserDetailsService">
+			<secu:password-encoder hash="md5" />
+		</secu:authentication-provider>
+	</secu:authentication-manager>
+</beans>
